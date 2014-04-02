@@ -1,0 +1,35 @@
+from sys import stdin
+
+T = int(stdin.readline())
+for t in range(T):
+    N = int(stdin.readline())
+    num = [int(i) for i in stdin.readline().split()]
+    a,b,c = [int(i) for i in stdin.readline().split()]
+    string = stdin.readline().strip()
+    A = 0
+    M = 1
+    flag = 0
+    start = 0
+    end = N-1
+    rev = 0
+    for i in range(N):
+        if string[i]=='R':
+            rev = 1 if rev==0 else 0
+        elif string[i]=='A':
+            A += a
+            flag = 1
+        elif string[i]=='M':
+            M = M*b
+            A = A*M
+            flag = 1
+        if(rev==1):
+            ans = num[end]
+            end = end-1
+        else:
+            ans = num[start]
+            start = start+1
+        if(flag==1):
+            ans = ans*M
+            ans += A
+        print(ans%c,end=' ')
+    print('')
